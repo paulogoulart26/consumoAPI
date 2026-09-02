@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
@@ -12,8 +11,8 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [DBZ, setDBZ] = useState({});
   const [poke, setPoke] = useState({});
-  const [evo, setEvo] = useState({})
-
+  const [filme, setFilme] = useState({});
+""
   useEffect(() => {
     const getData = async () => {
       try {
@@ -26,14 +25,14 @@ function App() {
         const responsePoke = await axios.get(
           "https://pokeapi.co/api/v2/pokemon/Salamence",
         );
-        const responseEvo1 = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon/Salamence",
+        const responseFilme = await axios.get(
+          "https://www.omdbapi.com/?t=Jurassic+Park&apikey=59ab1eb9",
         );
 
-        setEvo(responseEvo1.data);
         setPoke(responsePoke.data);
         setDBZ(responseDBZ.data);
         setPerfil(response.data);
+        setFilme(responseFilme.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -54,14 +53,8 @@ function App() {
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img
-            src={DBZ.image}
-            className="base"
-            width="170"
-            height="179"
-            alt=""
-          />
+        <div>
+          <img src={DBZ.image} className="base" height="280" alt="" />
         </div>
         <div>
           <h1>{perfil.nome}</h1>
@@ -83,7 +76,13 @@ function App() {
       <section id="next-steps">
         <div id="docs">
           <h2>{poke.species.name}</h2>
-          <img src={poke.sprites.front_shiny} alt="" />
+          <img
+            src={poke.sprites.front_shiny}
+            className="base"
+            width="170"
+            height="179"
+            alt=""
+          />
           <p>Meu Pet</p>
           <ul>
             <li>
@@ -98,19 +97,18 @@ function App() {
                 Peso: {poke.weight}
               </a>
             </li>
-            <button
-              type="button"
-              className="counter"
-              onClick={() => } // img do poke pokeEvo.img
-            ></button>
           </ul>
         </div>
         <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
+          <h2>Meu filme favorito é: {filme.Title}</h2>
+          <img
+            src={filme.Poster}
+            className="base"
+            width="170"
+            height="179"
+            alt=""
+          />
+          <p>Nota do IMDB: {filme.imdbRating}</p>
           <ul>
             <li>
               <a href="https://github.com/vitejs/vite" target="_blank">
