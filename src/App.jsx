@@ -12,7 +12,13 @@ function App() {
   const [DBZ, setDBZ] = useState({});
   const [poke, setPoke] = useState({});
   const [filme, setFilme] = useState({});
-""
+  const [text, setText] = useState(localStorage.getItem("easy-input") || "");
+  const [sfilme, setSfilme] = useState(localStorage.getItem("name-film") || "");
+
+  useEffect(() => {
+    localStorage.setItem("easy-input", text);
+  }, [text]);
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -28,11 +34,15 @@ function App() {
         const responseFilme = await axios.get(
           "https://www.omdbapi.com/?t=Jurassic+Park&apikey=59ab1eb9",
         );
+        const responsesfilme = await axios.get(
+          `https://www.omdbapi.com/?s=${setSfilme}&apikey=59ab1eb9`,
+        );
 
         setPoke(responsePoke.data);
         setDBZ(responseDBZ.data);
         setPerfil(response.data);
         setFilme(responseFilme.data);
+        setSfilme(responseFilme.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -41,7 +51,7 @@ function App() {
       }
     };
     getData();
-  }, []);
+  }, [text]);
 
   if (loading) {
     return <div>Loading</div>;
@@ -54,7 +64,29 @@ function App() {
     <>
       <section id="center">
         <div>
-          <img src={DBZ.image} className="base" height="280" alt="" />
+          <label>Digite o nome de um filme: </label>
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setSfilme(e.target.value)}
+            placeholder="Digite o nome do filme:"
+          />
+          <button
+            onClick={() => {
+              localStorage.setItem("easy-input", text);
+            }}
+          >
+            Enviar
+          </button>
+        </div>
+        <div>
+          <img
+            src={DBZ.image}
+            className="base"
+            height="280"
+            alt=""
+            style={{ marginTop: "50px" }}
+          />
         </div>
         <div>
           <h1>{perfil.nome}</h1>
