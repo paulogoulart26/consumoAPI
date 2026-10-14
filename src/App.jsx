@@ -7,7 +7,6 @@ import MovieTe from "./components/listMovie";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [perfil, setPerfil] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [DBZ, setDBZ] = useState({});
