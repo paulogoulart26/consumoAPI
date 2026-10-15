@@ -4,10 +4,10 @@ import axios from "axios";
 export default function CharDBZ() {
   const [loading, setLoading] = useState(true);
   const [DBZ, setDBZ] = useState({});
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true);
       try {
         const responseDBZ = await axios.get(
           "https://dragonball-api.com/api/characters/33",
