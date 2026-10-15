@@ -4,24 +4,19 @@ import viteLogo from "./assets/vite.svg";
 import "./App.css";
 import axios from "axios";
 import MovieTe from "./components/listMovie";
+import Perfil from "./components/perfil";
+import CharDBZ from "./components/charDBZ";
 
 function App() {
   const [count, setCount] = useState(0);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [DBZ, setDBZ] = useState({});
   const [poke, setPoke] = useState({});
   const [filme, setFilme] = useState({});
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(
-          "https://6a79e554674f43f4db11ebc8.mockapi.io/api/person/7",
-        );
-        const responseDBZ = await axios.get(
-          "https://dragonball-api.com/api/characters/33",
-        );
         const responsePoke = await axios.get(
           "https://pokeapi.co/api/v2/pokemon/Salamence",
         );
@@ -30,8 +25,6 @@ function App() {
         );
 
         setPoke(responsePoke.data);
-        setDBZ(responseDBZ.data);
-        setPerfil(response.data);
         setFilme(responseFilme.data);
         setLoading(false);
       } catch (error) {
@@ -54,19 +47,11 @@ function App() {
     <>
       <section id="center">
         <div>
-          <MovieTe/>
+          <MovieTe />
         </div>
+        <CharDBZ />
         <div>
-          <img
-            src={DBZ.image}
-            className="base"
-            height="280"
-            alt=""
-            style={{ marginTop: "50px" }}
-          />
-        </div>
-        <div>
-          <h1>{perfil.nome}</h1>
+          <Perfil />
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
