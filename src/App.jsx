@@ -5,21 +5,16 @@ import MovieTe from "./components/listMovie";
 import Perfil from "./components/perfil";
 import CharDBZ from "./components/charDBZ";
 import PokePet from "./components/pokePET";
+import MyMovie from "./components/myMovie";
 
 function App() {
   const [count, setCount] = useState(0);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [filme, setFilme] = useState({});
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const responseFilme = await axios.get(
-          "https://www.omdbapi.com/?t=Jurassic+Park&apikey=59ab1eb9",
-        );
-
-        setFilme(responseFilme.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -64,15 +59,7 @@ function App() {
       <section id="next-steps">
         <PokePet />
         <div id="social">
-          <h2>Meu filme favorito é: {filme.Title}</h2>
-          <img
-            src={filme.Poster}
-            className="base"
-            width="170"
-            height="179"
-            alt=""
-          />
-          <p>Nota do IMDB: {filme.imdbRating}</p>
+          <MyMovie />
           <ul>
             <li>
               <a href="https://github.com/vitejs/vite" target="_blank">

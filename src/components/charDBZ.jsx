@@ -31,9 +31,8 @@ export default function CharDBZ() {
       <img
         src={DBZ.image}
         className="base"
-        height="280"
+        height="230"
         alt=""
-        style={{ marginTop: "50px" }}
       />
     </div>
   );
