@@ -17,17 +17,6 @@
   }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(164, 153, 233);
-  min-height: 100vh;
-}
-
-.card {
-  color: white;
-}
-
 .hero {
   position: relative;
 
