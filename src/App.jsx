@@ -8,9 +8,13 @@ import PokePet from "./components/pokePET";
 import MyMovie from "./components/myMovie";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [tema, setTema] = useState("claro");
+
+useEffect(() => {
+  document.documentElement.setAttribute("data-theme", tema);
+}, [tema]);
 
   useEffect(() => {
     const getData = async () => {
@@ -41,16 +45,13 @@ function App() {
         <CharDBZ />
         <div>
           <Perfil />
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
         </div>
         <button
           type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          className="tema"
+          onClick={() => setTema(tema === "claro" ? "escuro" : "claro")}
         >
-          Count is {count}
+          Tema: {tema}
         </button>
       </section>
 
