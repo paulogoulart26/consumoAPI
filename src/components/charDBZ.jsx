@@ -28,12 +28,8 @@ export default function CharDBZ() {
     <p>Carregando charDBZ...</p>
   ) : (
     <div>
-      <img
-        src={DBZ.image}
-        className="base"
-        height="230"
-        alt=""
-      />
+      <h2>{DBZ.name}</h2>
+      <img src={DBZ.image} className="base" height="230" alt={DBZ.name} />
     </div>
   );
 }

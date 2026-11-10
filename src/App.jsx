@@ -6,15 +6,11 @@ import Perfil from "./components/perfil";
 import CharDBZ from "./components/charDBZ";
 import PokePet from "./components/pokePET";
 import MyMovie from "./components/myMovie";
+import DarkTheme from "./components/darkTheme";
 
 function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [tema, setTema] = useState("claro");
-
-useEffect(() => {
-  document.documentElement.setAttribute("data-theme", tema);
-}, [tema]);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,84 +34,33 @@ useEffect(() => {
 
   return (
     <>
-      <section id="center">
-        <div>
+      {/* Topo da página: nome à esquerda, botão de tema à direita */}
+      <header>
+        <Perfil />
+        <DarkTheme />
+      </header>
+
+      {/* Conteúdo principal */}
+      <main>
+        {/* Os três cards que vão ficar lado a lado */}
+        <section className="cards">
+          {/* Cada <article> é a "caixa" de um card */}
+          <article className="card">
+            <CharDBZ />
+          </article>
+          <article className="card">
+            <PokePet />
+          </article>
+          <article className="card">
+            <MyMovie />
+          </article>
+        </section>
+
+        {/* Busca de filmes */}
+        <section>
           <MovieTe />
-        </div>
-        <CharDBZ />
-        <div>
-          <Perfil />
-        </div>
-        <button
-          type="button"
-          className="tema"
-          onClick={() => setTema(tema === "claro" ? "escuro" : "claro")}
-        >
-          Tema: {tema}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <PokePet />
-        <div id="social">
-          <MyMovie />
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        </section>
+      </main>
     </>
   );
 }
