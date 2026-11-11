@@ -103,10 +103,17 @@ main {
     text-decoration: none;
   }
 
-  .logo,
-  .button-icon {
+  .tipo{
     height: 18px;
     width: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .peso {
+    height: 18px;
+    width: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
   }
 }
 

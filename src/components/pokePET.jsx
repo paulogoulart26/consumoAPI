@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import reactLogo from "../assets/react.svg";
-import viteLogo from "../assets/vite.svg";
+import tipoLogo from "../assets/tipo.png";
+import pesoLogo from "../assets/peso.png";
 
 export default function PokePet() {
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ export default function PokePet() {
     <p>Carregando PokePet...</p>
   ) : (
     <div id="docs">
-      <h2>{poke.species.name}</h2>
+      <h2>Meu Pet</h2>
       <img
         src={poke.sprites.front_shiny}
         className="base"
@@ -38,19 +38,15 @@ export default function PokePet() {
         height="179"
         alt=""
       />
-      <p>Meu Pet</p>
+      <h2>{poke.species.name}</h2>
       <ul>
         <li>
-          <a href="https://vite.dev/" target="_blank">
-            <img className="logo" src={viteLogo} alt="" />
-            Tipo: {poke.types[0].type.name}
-          </a>
+          <img className="tipo" src={tipoLogo} alt="" />
+          Tipo: {poke.types[0].type.name}
         </li>
         <li>
-          <a href="https://react.dev/" target="_blank">
-            <img className="button-icon" src={reactLogo} alt="" />
-            Peso: {poke.weight}
-          </a>
+          <img className="peso" src={pesoLogo} alt="" />
+          Peso: {poke.weight}
         </li>
       </ul>
     </div>
