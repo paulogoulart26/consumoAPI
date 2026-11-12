@@ -24,9 +24,15 @@ export default function CharDBZ() {
     getData();
   }, []);
 
-  return loading ? (
-    <p>Carregando charDBZ...</p>
-  ) : (
+  if (loading) {
+    return <p>Carregando charDBZ...</p>;
+  }
+
+  if (error) {
+    return <p>Erro ao carregar o personagem.</p>;
+  }
+
+  return (
     <div>
       <h2>{DBZ.name}</h2>
       <img src={DBZ.image} className="base" height="230" alt={DBZ.name} />

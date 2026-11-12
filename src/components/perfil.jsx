@@ -4,6 +4,7 @@ import axios from "axios";
 export default function Perfil() {
   const [perfil, setPerfil] = useState({});
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -24,5 +25,13 @@ export default function Perfil() {
     getData();
   }, []);
 
-  return loading ? <p>Carregando nome...</p> : <h1>{perfil.nome}</h1>;
+  if (loading) {
+    return <p>Carregando nome...</p>;
+  }
+
+  if (error) {
+    return <p>Erro ao carregar o nome.</p>;
+  }
+
+  return <h1>{perfil.nome}</h1>;
 }

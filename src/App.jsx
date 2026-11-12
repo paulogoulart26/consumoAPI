@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
 import MovieTe from "./components/listMovie";
 import Perfil from "./components/perfil";
 import CharDBZ from "./components/charDBZ";
