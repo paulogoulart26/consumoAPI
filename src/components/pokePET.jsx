@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import tipoLogo from "../assets/tipo.png";
-import pesoLogo from "../assets/peso.png";
+import PokemonCard from "./pokemonCard";
+import PokeEvolucao from "./pokeEvolucao";
 
 export default function PokePet() {
   const [loading, setLoading] = useState(true);
@@ -26,29 +26,30 @@ export default function PokePet() {
     getData();
   }, []);
 
-  return loading ? (
-    <p>Carregando PokePet...</p>
-  ) : (
-    <div id="docs">
+  if (loading) {
+    return <p>Carregando PokePet...</p>;
+  }
+
+  if (error) {
+    return <p>Erro ao carregar o PokePet.</p>;
+  }
+
+  return (
+    <div>
       <h2>Meu Pet</h2>
-      <img
-        src={poke.sprites.front_shiny}
-        className="base"
-        width="170"
-        height="179"
-        alt=""
+
+      {/* O PokePet busca os dados e entrega tudo pronto para o card.
+          poke.stats[0] é a vida (hp) e poke.stats[1] é o ataque. */}
+      <PokemonCard
+        nome={poke.species.name}
+        imagem={poke.sprites.front_shiny}
+        tipo={poke.types[0].type.name}
+        peso={poke.weight}
+        vida={poke.stats[0].base_stat}
+        ataque={poke.stats[1].base_stat}
       />
-      <h2>{poke.species.name}</h2>
-      <ul>
-        <li>
-          <img className="tipo" src={tipoLogo} alt="" />
-          Tipo: {poke.types[0].type.name}
-        </li>
-        <li>
-          <img className="peso" src={pesoLogo} alt="" />
-          Peso: {poke.weight}
-        </li>
-      </ul>
+
+      <PokeEvolucao nome={poke.species.name} />
     </div>
   );
 }
