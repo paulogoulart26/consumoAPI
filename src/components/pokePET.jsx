@@ -78,7 +78,7 @@ export default function PokePet() {
               Alguns Pokémon não têm imagem shiny, então usa a normal. */}
           <PokemonCard
             nome={poke.species.name}
-            imagem={poke.sprites.front_shiny || poke.sprites.front_default}
+            imagem={poke.sprites.front_default}
             tipo={poke.types[0].type.name}
             peso={poke.weight}
             vida={poke.stats[0].base_stat}
