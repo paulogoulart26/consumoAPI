@@ -1,29 +1,40 @@
 /* =========================================================
-   CABEÇALHO — Etapa 2: Flexbox
-   Flexbox organiza os "filhos" de uma caixa em UMA linha
-   (ou uma coluna). Ótimo para barras, menus e cabeçalhos.
+   MOBILE-FIRST
+   O estilo "normal" (sem @media) é o do CELULAR.
+   Depois, os @media (min-width: ...) lá no final vão
+   ajustando para telas MAIORES (tablet, PC, ultrawide).
+
+   Unidades:
+   - rem = relativo ao tamanho da fonte da página (1rem = 16px)
+   - em  = relativo ao tamanho da fonte do próprio elemento
+   - %   = relativo ao tamanho do elemento pai
+   (Bordas finas de 1px/2px são a exceção: ficam em px mesmo)
+   ========================================================= */
+
+/* =========================================================
+   CABEÇALHO — Flexbox
    ========================================================= */
 header {
-  display: flex;                  /* liga o Flexbox: filhos ficam lado a lado */
-  justify-content: space-between; /* um filho em cada ponta: nome à esquerda, botão à direita */
-  align-items: center;            /* centraliza na vertical (nome e botão na mesma altura) */
-  gap: 16px;                      /* espaço mínimo entre eles */
-  padding: 16px 32px;             /* respiro: 16px em cima/embaixo, 32px nas laterais */
-  border-bottom: 1px solid var(--border); /* linha separando o topo do resto */
+  display: flex;
+  flex-wrap: wrap;                /* se não couber, o botão desce para a linha de baixo */
+  justify-content: space-between; /* nome à esquerda, botão à direita */
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
-/* O <h1> do Perfil é enorme por padrão (56px). No cabeçalho, deixamos menor. */
 header h1 {
-  font-size: 32px;
+  font-size: 1.5rem;
   margin: 0;
 }
 
 /* Botão de tema (componente DarkTheme) */
 .tema {
   font: inherit;
-  font-size: 16px;
-  padding: 8px 14px;
-  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
   color: var(--accent);
   background: var(--accent-bg);
   border: 2px solid transparent;
@@ -44,75 +55,60 @@ header h1 {
    ========================================================= */
 main {
   display: flex;
-  flex-direction: column; /* Flexbox em COLUNA: as seções ficam uma embaixo da outra */
-  gap: 32px;              /* espaço entre a seção dos cards e a da busca */
-  padding: 32px;
+  flex-direction: column; /* seções uma embaixo da outra */
+  gap: 2rem;
+  padding: 1rem;
 }
 
 /* =========================================================
-   CARDS — Etapa 3: Grid
-   Grid organiza em LINHAS E COLUNAS ao mesmo tempo,
-   como uma tabela. Ótimo para galerias e cards.
+   CARDS — Grid
+   No celular: 1 coluna só (cards empilhados)
    ========================================================= */
 .cards {
-  display: grid;                         /* liga o Grid */
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas; "1fr" = uma fração do espaço, então ficam iguais */
-  gap: 24px;                             /* espaço entre os cards */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
 }
 
 /* A "caixa" de cada card (também usada pela busca de filmes) */
 .card {
   display: flex;
-  flex-direction: column; /* título, imagem e texto um embaixo do outro */
-  align-items: center;    /* tudo centralizado na horizontal */
-  gap: 12px;
-  padding: 24px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
   background: var(--social-bg);
   border: 1px solid var(--border);
-  border-radius: 12px;    /* cantos arredondados */
+  border-radius: 0.75rem;
   transition: box-shadow 0.3s;
 
   &:hover {
-    box-shadow: var(--shadow); /* sombra ao passar o mouse */
+    box-shadow: var(--shadow);
   }
 
   /* Imagens dos cards: todas com a mesma altura, sem distorcer */
   .base {
-    height: 200px;
+    height: 12.5rem;
     width: auto;
     max-width: 100%;
     object-fit: contain;
   }
 
-  /* Listas dentro dos cards (tipo/peso do Pet, resultados da busca) */
+  /* Listas dentro dos cards */
   ul {
-    list-style: none; /* tira as bolinhas */
+    list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
-  /* Links do Pet (Tipo / Peso) */
-  a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-h);
-    text-decoration: none;
-  }
-
-  .tipo{
-    height: 18px;
-    width: 18px;
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-  .peso {
-    height: 18px;
-    width: 18px;
-    margin-right: 8px;
+  /* Ícones de tipo e peso: em "em" acompanham o tamanho do texto */
+  .icone {
+    height: 1.125em;
+    width: 1.125em;
+    margin-right: 0.5em;
     vertical-align: middle;
   }
 }
@@ -120,11 +116,11 @@ main {
 /* Campo de busca de filmes */
 .card input {
   width: 100%;
-  max-width: 400px;
+  max-width: 25rem;
   box-sizing: border-box;
   font: inherit;
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0.5rem;
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text-h);
@@ -136,19 +132,128 @@ main {
 }
 
 /* =========================================================
-   RESPONSIVO — telas pequenas (celular)
-   @media aplica estas regras só quando a tela tem até 768px.
+   POKEMON CARD — a cor muda conforme o tipo
+   A variável --cor-tipo vem do componente PokemonCard.
    ========================================================= */
-@media (max-width: 768px) {
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 3px solid var(--cor-tipo);
+  /* fundo: 15% da cor do tipo misturada com a cor de fundo do tema */
+  background: color-mix(in srgb, var(--cor-tipo) 15%, var(--bg));
+
+  h2 {
+    margin: 0;
+    text-transform: capitalize; /* "salamence" vira "Salamence" */
+  }
+}
+
+/* =========================================================
+   LINHA EVOLUTIVA
+   Cada .elo é: [Pokémon] → [próximas evoluções]
+   As próximas ficam em coluna (para o Eevee caber).
+   ========================================================= */
+.evolucao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-h);
+  }
+}
+
+.elo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.elo-proximos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.elo-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+
+  img {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+/* O Pokémon que está no card fica destacado */
+.elo-pokemon.atual {
+  background: var(--accent-bg);
+  outline: 2px solid var(--accent-border);
+  color: var(--text-h);
+  font-weight: bold;
+}
+
+.seta {
+  font-size: 1.25rem;
+}
+
+/* =========================================================
+   RESPONSIVO — do menor para o maior
+   ========================================================= */
+
+/* TABLET: telas a partir de 48rem (768px) */
+@media (min-width: 48rem) {
   header {
-    padding: 16px;
+    padding: 1rem 2rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
   }
 
   main {
-    padding: 16px;
+    padding: 2rem;
   }
 
   .cards {
-    grid-template-columns: 1fr; /* no celular: 1 coluna só, cards empilhados */
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  }
+}
+
+/* PC: telas a partir de 64rem (1024px) */
+@media (min-width: 64rem) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  }
+}
+
+/* ULTRAWIDE: telas a partir de 120rem (1920px) */
+@media (min-width: 120rem) {
+  main {
+    padding: 3rem;
+  }
+
+  .cards {
+    gap: 2.5rem;
+  }
+
+  .elo-pokemon img {
+    width: 4.5rem;
+    height: 4.5rem;
   }
 }

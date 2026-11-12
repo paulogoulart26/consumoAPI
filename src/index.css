@@ -1,3 +1,6 @@
+/* =========================================================
+   VARIÁVEIS DE CORES (tema claro)
+   ========================================================= */
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -15,8 +18,9 @@
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  /* 100% = o tamanho padrão do navegador (16px). Todo "rem" parte daqui. */
+  font: 100%/1.45 var(--sans);
+  letter-spacing: 0.01em;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -24,12 +28,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
+/* Tema escuro */
 :root[data-theme="escuro"] {
   --text: #f3f4f6;
   --text-h: #f3f4f6;
@@ -52,9 +53,10 @@ body {
   margin: 0;
 }
 
+/* A página ocupa a tela toda, mas com um limite de largura */
 #root {
-  width: 1126px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 75rem;
   margin: 0 auto;
   text-align: center;
   border-inline: 1px solid var(--border);
@@ -71,24 +73,20 @@ h2 {
   color: var(--text-h);
 }
 
+/* Tamanhos no celular (mobile-first) */
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: 2.25rem;
+  letter-spacing: -0.03em;
+  margin: 1.25rem 0;
 }
+
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+  font-size: 1.25rem;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
 }
+
 p {
   margin: 0;
 }
@@ -97,13 +95,40 @@ code,
 .counter {
   font-family: var(--mono);
   display: inline-flex;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   color: var(--text-h);
 }
 
 code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  padding: 0.25rem 0.5rem;
   background: var(--code-bg);
+}
+
+/* =========================================================
+   RESPONSIVO — do menor para o maior
+   ========================================================= */
+
+/* PC: a partir de 64rem (1024px), tudo fica um pouco maior */
+@media (min-width: 64rem) {
+  :root {
+    font-size: 112.5%; /* 18px: como tudo está em rem, a página toda cresce junto */
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    margin: 2rem 0;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ULTRAWIDE: a partir de 120rem (1920px), a página pode ficar mais larga */
+@media (min-width: 120rem) {
+  #root {
+    max-width: 100rem;
+  }
 }
