@@ -9,6 +9,7 @@ export default function PokeEvolucao({ nome }) {
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
+      setError(false); // limpa o erro da tentativa anterior
       try {
         // 1ª chamada: a "espécie" do Pokémon, que tem o link da evolução
         const responseEspecie = await axios.get(

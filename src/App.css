@@ -22,6 +22,12 @@ header {
   gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid var(--border);
+
+  /* "sticky": o cabeçalho fica grudado no topo ao rolar a página */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
 }
 
 header h1 {
@@ -56,8 +62,40 @@ header h1 {
 main {
   display: flex;
   flex-direction: column; /* seções uma embaixo da outra */
-  gap: 2rem;
+  gap: 2.5rem;
   padding: 1rem;
+}
+
+/* Cada seção: título em cima, conteúdo embaixo */
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Título da seção: alinhado à esquerda */
+.titulo-secao {
+  text-align: left;
+  margin: 0;
+}
+
+/* Textinho pequeno acima do título do card ("Filme favorito") */
+.rotulo {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+footer {
+  margin-top: auto; /* empurra o rodapé para o fim da tela */
+  padding: 1.5rem 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.875rem;
 }
 
 /* =========================================================
@@ -141,6 +179,8 @@ main {
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+  max-width: 20rem;
+  justify-self: center; /* centraliza o card dentro da coluna do grid */
   box-sizing: border-box;
   padding: 1rem;
   border-radius: 0.75rem;
@@ -151,6 +191,77 @@ main {
   h2 {
     margin: 0;
     text-transform: capitalize; /* "salamence" vira "Salamence" */
+  }
+}
+
+/* =========================================================
+   RANDOM ENCOUNTER — botão e estados (loading / erro)
+   ========================================================= */
+.pokepet {
+  width: 100%;
+}
+
+/* No celular: card e evolução um embaixo do outro */
+.pokepet-conteudo {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.botao-sortear {
+  font: inherit;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 2px solid transparent;
+  color: var(--bg); /* texto com a cor do fundo: contraste bom nos dois temas */
+  background: var(--accent);
+  cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  /* Botão travado enquanto carrega */
+  &:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+}
+
+/* Caixa usada no loading e no erro */
+.estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 12.5rem; /* mesma altura da imagem, para a tela não "pular" */
+  padding: 1rem;
+}
+
+.estado-erro {
+  color: var(--erro);
+  border: 2px dashed var(--erro);
+  border-radius: 0.75rem;
+}
+
+/* Bolinha girando (spinner) */
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 0.375rem solid var(--border);
+  border-top-color: var(--accent); /* só a parte de cima colorida */
+  border-radius: 50%;              /* vira um círculo */
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -230,15 +341,18 @@ main {
     padding: 2rem;
   }
 
-  .cards {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  footer {
+    padding: 1.5rem 2rem;
   }
-}
 
-/* PC: telas a partir de 64rem (1024px) */
-@media (min-width: 64rem) {
+  /* Favoritos: 2 cards lado a lado */
   .cards {
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Pokémon: card à esquerda, evolução à direita */
+  .pokepet-conteudo {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

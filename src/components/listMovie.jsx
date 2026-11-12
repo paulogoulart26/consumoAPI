@@ -41,16 +41,17 @@ export default function MovieTe() {
 
   return (
     <div className="card">
-      <h2>Nível Médio: Consumo de API OMDb com Debounce</h2>
-      <p>Busca filmes assim que você para de digitar.</p>
+      <p>A busca começa assim que você para de digitar.</p>
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Buscar filme..."
+        placeholder="Ex: Interstellar"
       />
 
-      {loading ? (
+      {query.trim() === "" ? (
+        <p>Digite o nome de um filme para buscar.</p>
+      ) : loading ? (
         <p>Carregando filmes...</p>
       ) : movies.length > 0 ? (
         <ul className="movie-list">

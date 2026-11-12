@@ -35,17 +35,14 @@ export default function MyMovie() {
 
   return (
     <>
-      <h2>Meu filme favorito é: {filme.Title}</h2>
+      <p className="rotulo">Filme favorito</p>
+      <h2>{filme.Title}</h2>
 
-      <img
-        src={filme.Poster}
-        className="base"
-        width="170"
-        height="179"
-        alt={`Pôster de ${filme.Title}`}
-      />
+      <img src={filme.Poster} className="base" alt={`Pôster de ${filme.Title}`} />
 
-      <p>Nota do IMDB: {filme.imdbRating}</p>
+      <p>
+        {filme.Year} · ⭐ IMDb {filme.imdbRating}
+      </p>
     </>
   );
 }

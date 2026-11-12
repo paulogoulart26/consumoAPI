@@ -33,9 +33,11 @@ export default function CharDBZ() {
   }
 
   return (
-    <div>
+    <>
+      <p className="rotulo">Personagem favorito</p>
       <h2>{DBZ.name}</h2>
-      <img src={DBZ.image} className="base" height="230" alt={DBZ.name} />
-    </div>
+      <img src={DBZ.image} className="base" alt={DBZ.name} />
+      <p>Raça: {DBZ.race}</p>
+    </>
   );
 }
